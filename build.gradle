@@ -99,6 +99,9 @@ android {
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
+  dependencies {
+    compile 'com.android.support:multidex:1.0.3'
+  }
   lintOptions {
     checkReleaseBuilds false
     // Or, if you prefer, you can continue to check for errors in release builds,
