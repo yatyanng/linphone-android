@@ -179,12 +179,15 @@ public class InAppBillingManager implements PurchasesUpdatedListener {
 
         Log.d(TAG, "Got a verified purchase: " + purchase);
 		XmlRpcHelper xmlRpcHelper = new XmlRpcHelper();
+		/*
+		This changes the expiration. The signature is inside the original json and is checked on the server side (again).
 		xmlRpcHelper.newUpdateAccountExpireAsync(new XmlRpcListenerBase() {
 			@Override
 			public void onAccountExpireUpdated(String result) {
 				InAppPurchaseFragment.instance().recreateBillingManager();
 			}
 		}, LinphonePreferences.instance().getAccountUsername(0), LinphonePreferences.instance().getAccountHa1(0), "lockfone.com", purchase.getOriginalJson());
+		*/
         InAppPurchaseFragment.instance().hideInAppList();
     }
 
@@ -328,6 +331,8 @@ public class InAppBillingManager implements PurchasesUpdatedListener {
 
 	private void GetUserOfTransaction(final Purchase p) {
 		XmlRpcHelper helper = new XmlRpcHelper();
+		/*
+		This requires a transaction database that holds the id of the user for each transaction.
 		helper.getUserOfTransactionAsync(new XmlRpcListenerBase() {
 			@Override
 			public void onUserOfTransactionFetched(String user) {
@@ -349,6 +354,7 @@ public class InAppBillingManager implements PurchasesUpdatedListener {
 			public void onError(String error) {
 			}
 		}, p.getOriginalJson(), p.getSignature());
+		*/
 	}
 
 }

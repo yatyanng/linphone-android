@@ -224,6 +224,8 @@ public class InAppPurchaseFragment extends Fragment implements View.OnClickListe
 
 	public void buyInapp(String sku) {
 		String username = getUsername();
+		/*
+		To be adapted to actual subscriptions. These are from coponi.
 		switch (sku) {
 			case (InAppConstants.SKU_YEARLY_SUB):
 				if (mInappController.getMonthlySub()) {
@@ -245,6 +247,7 @@ public class InAppPurchaseFragment extends Fragment implements View.OnClickListe
 				}
 				break;
 		}
+		*/
 	}
 
 	public static InAppPurchaseFragment instance() {
