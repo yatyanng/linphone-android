@@ -83,7 +83,7 @@ import org.linphone.core.LinphoneCoreListenerBase;
 import org.linphone.core.LinphoneProxyConfig;
 import org.linphone.core.Reason;
 import org.linphone.mediastream.Log;
-import org.linphone.purchase.InAppPurchaseActivity;
+import org.linphone.purchase.InAppPurchaseFragment;
 import org.linphone.ui.AddressText;
 import org.linphone.xmlrpc.XmlRpcHelper;
 import org.linphone.xmlrpc.XmlRpcListenerBase;
@@ -397,6 +397,9 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 		case CHAT:
 			fragment = new ChatFragment();
 			break;
+		case INAPPS:
+			fragment = new InAppPurchaseFragment();
+			break;
 		default:
 			break;
 		}
@@ -634,7 +637,7 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 
 
 	public void displayInapp() {
-		startActivity(new Intent(LinphoneActivity.this, InAppPurchaseActivity.class));
+		changeCurrentFragment(FragmentsAvailable.INAPPS, null);
 	}
 
 	public int getUnreadMessageCount() {
@@ -782,6 +785,7 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 			break;
 		case SETTINGS:
 		case ACCOUNT_SETTINGS:
+		case INAPPS:
 			hideTabBar(true);
 			mTopBar.setVisibility(View.VISIBLE);
 			break;
@@ -1796,6 +1800,7 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 						calresult.setTimeInMillis(timestamp);
 
 						int diff = getDiffDays(calresult, Calendar.getInstance());
+						accountIsExpired(diff < 0);
 						if (diff != -1 && diff <= getResources().getInteger(R.integer.days_notification_shown)) {
 							displayInappNotification(timestampToHumanDate(calresult));
 						}
@@ -1813,10 +1818,9 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 		Timestamp now = new Timestamp(new Date().getTime());
 		if (LinphonePreferences.instance().getInappPopupTime() != null && Long.parseLong(LinphonePreferences.instance().getInappPopupTime()) > now.getTime()) {
 			return;
-		} else {
-			long newDate = now.getTime() + getResources().getInteger(R.integer.time_between_inapp_notification);
-			LinphonePreferences.instance().setInappPopupTime(String.valueOf(newDate));
 		}
+		long newDate = now.getTime() + getResources().getInteger(R.integer.time_between_inapp_notification);
+		LinphonePreferences.instance().setInappPopupTime(String.valueOf(newDate));
 		if(isTrialAccount){
 			LinphoneService.instance().displayInappNotification(String.format(getString(R.string.inapp_notification_trial_expire), date));
 		} else {
@@ -1825,13 +1829,26 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 
 	}
 
-	private String timestampToHumanDate(Calendar cal) {
+	public void forceDisplayInappNotification(String date) {
+		Timestamp now = new Timestamp(new Date().getTime());
+
+		long newDate = now.getTime() + getResources().getInteger(R.integer.time_between_inapp_notification);
+		LinphonePreferences.instance().setInappPopupTime(String.valueOf(newDate));
+		if(isTrialAccount){
+			LinphoneService.instance().displayInappNotification(String.format(getString(R.string.inapp_notification_trial_expire), date));
+		} else {
+			LinphoneService.instance().displayInappNotification(String.format(getString(R.string.inapp_notification_account_expire), date));
+		}
+
+	}
+
+	public String timestampToHumanDate(Calendar cal) {
 		SimpleDateFormat dateFormat;
 		dateFormat = new SimpleDateFormat(getResources().getString(R.string.inapp_popup_date_format));
 		return dateFormat.format(cal.getTime());
 	}
 
-	private int getDiffDays(Calendar cal1, Calendar cal2) {
+	public static int getDiffDays(Calendar cal1, Calendar cal2) {
 		if (cal1 == null || cal2 == null) {
 			return -1;
 		}
@@ -1863,6 +1880,15 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 		}
 		String data = new String(fileContent);
 		return data;
+	}
+
+	public void accountIsExpired(boolean expired) {
+		// If the account is expired (expired = true) then we block the registration. Else we don't.
+		LinphoneCore lc = LinphoneManager.getLc();
+		lc.getDefaultProxyConfig().edit();
+		lc.getDefaultProxyConfig().enableRegister(!expired);
+		lc.getDefaultProxyConfig().done();
+		lc.refreshRegisters();
 	}
 
 }

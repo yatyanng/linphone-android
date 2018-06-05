@@ -307,8 +307,8 @@ public class InAppPurchaseFragment extends Fragment implements View.OnClickListe
 						Calendar calresult = Calendar.getInstance();
 						calresult.setTimeInMillis(timestamp);
 
-						int diff = LinphoneActivity.getDaysCountSinceNow(calresult);
-						mActivity.forceDisplayInappNotification(LinphoneActivity.instance().timestampToHumanDate(calresult), diff);
+						int diff = LinphoneActivity.getDiffDays(calresult, Calendar.getInstance());
+						mActivity.forceDisplayInappNotification(LinphoneActivity.instance().timestampToHumanDate(calresult));
 					}
 				}
 

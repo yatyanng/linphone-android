@@ -19,7 +19,7 @@ buildscript {
     google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.0'
+    classpath 'com.android.tools.build:gradle:3.1.2'
     if (googleFile.exists()) {
       classpath 'com.google.gms:google-services:3.1.0'
     }
@@ -32,12 +32,16 @@ allprojects {
     mavenCentral()
     mavenLocal()
     google()
+    flatDir {
+      dirs 'libs'
+    }
   }
 }
 
 apply plugin: 'com.android.application'
 
 dependencies {
+  compile(name: 'liblinphone-sdk', ext: 'aar')
   androidTestCompile('com.android.support.test.espresso:espresso-core:+') {
     exclude module: 'support-annotations'
   }
@@ -50,6 +54,8 @@ dependencies {
     compile fileTree(include: 'gcm.jar', dir: 'libs')
     compile 'com.android.support:support-v4:27.1.0'
   }
+  api 'com.android.billingclient:billing:1.1'
+  compile 'com.google.android.gms:play-services-base:9.4.0'
 }
 
 if (firebaseEnable()) {

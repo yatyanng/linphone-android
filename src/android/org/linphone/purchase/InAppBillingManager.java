@@ -59,6 +59,7 @@ public class InAppBillingManager implements PurchasesUpdatedListener {
 
     public InAppBillingManager(Activity activity, final BillingUpdatesListener updatesListener) {
         Log.d(TAG, "Creating Billing client.");
+        
         mActivity = activity;
         mBillingUpdatesListener = updatesListener;
         mBillingClient = BillingClient.newBuilder(mActivity).setListener(this).build();

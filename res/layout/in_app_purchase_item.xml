@@ -4,7 +4,7 @@
 	android:id="@+id/inapp_purchase"
 	android:background="@color/colorH"
 	android:layout_width="match_parent"
-	android:layout_height="60dp">
+	android:layout_height="70dp">
 
 	<ImageView
 		android:id="@+id/inapp_icon"
