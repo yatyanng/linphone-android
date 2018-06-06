@@ -269,7 +269,7 @@ public class InAppPurchaseFragment extends Fragment implements View.OnClickListe
 					calresult.setTimeInMillis(timestamp);
 
 					long diff = timestamp - Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
-					isAccountExpired = (diff <= 0);
+					isAccountExpired = (diff < 0);
 					mActivity.accountIsExpired(isAccountExpired);
 					FetchTrial();
 				}
