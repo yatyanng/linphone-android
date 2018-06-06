@@ -32,7 +32,8 @@ public enum FragmentsAvailable {
 	ACCOUNT_SETTINGS,
 	SETTINGS,
 	CHAT_LIST,
-	CHAT;
+	CHAT,
+	INAPPS;
 
 	public boolean shouldAnimate() {
 		return true;
@@ -70,6 +71,9 @@ public enum FragmentsAvailable {
 
 		case CHAT:
 			return CHAT_LIST.isRightOf(fragment) || fragment == CHAT_LIST;
+
+		case INAPPS:
+			return INAPPS.isRightOf(fragment) || fragment == INAPPS;
 
 		default:
 			return false;
