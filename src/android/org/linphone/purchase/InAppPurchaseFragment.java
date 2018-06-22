@@ -18,43 +18,39 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-import java.util.Locale;
-
-import org.linphone.LinphoneManager;
-import org.linphone.LinphonePreferences;
-import org.linphone.core.LinphoneProxyConfig;
-
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import org.linphone.R;
-
-import android.app.AlertDialog;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.util.Log;
-
-import org.linphone.LinphoneActivity;
-import org.linphone.xmlrpc.XmlRpcHelper;
-import org.linphone.xmlrpc.XmlRpcListenerBase;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+import android.widget.TextView;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClient.SkuType;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
-import android.content.Context;
+import org.linphone.LinphoneActivity;
+import org.linphone.LinphoneManager;
+import org.linphone.LinphonePreferences;
+import org.linphone.R;
+import org.linphone.core.LinphoneProxyConfig;
+import org.linphone.xmlrpc.XmlRpcHelper;
+import org.linphone.xmlrpc.XmlRpcListenerBase;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class InAppPurchaseFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 

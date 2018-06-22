@@ -74,6 +74,7 @@ public enum FragmentsAvailable {
 
 		case INAPPS:
 			return INAPPS.isRightOf(fragment) || fragment == INAPPS;
+
 		default:
 			return false;
 		}

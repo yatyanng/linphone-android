@@ -634,8 +634,6 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 		startActivity(new Intent(LinphoneActivity.this, AssistantActivity.class));
 	}
 
-
-
 	public void displayInapp() {
 		changeCurrentFragment(FragmentsAvailable.INAPPS, null);
 	}

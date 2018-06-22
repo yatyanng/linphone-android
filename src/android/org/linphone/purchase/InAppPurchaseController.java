@@ -1,7 +1,5 @@
 package org.linphone.purchase;
 
-import android.util.Log;
-
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.Purchase;
 
