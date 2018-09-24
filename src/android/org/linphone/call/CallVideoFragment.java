@@ -89,7 +89,7 @@ public class CallVideoFragment extends Fragment implements OnGestureListener, On
 
             public void onVideoPreviewSurfaceReady(AndroidVideoWindowImpl vw, SurfaceView surface) {
                 mCaptureView = surface;
-                LinphoneManager.getLc().setNativePreviewWindowId(mCaptureView);
+                LinphoneManager.getLc().setNativePreviewWindowId(mCaptureView.getHolder().getSurface());
                 resizePreview();
             }
 
