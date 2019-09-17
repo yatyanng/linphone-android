@@ -856,6 +856,7 @@ public class LinphoneActivity extends LinphoneGenericActivity implements OnClick
 			return mTime;
 		}
 	};
+
 	public List<String> getChatList() {
 		ArrayList<String> chatList = new ArrayList<String>();
 

@@ -114,7 +114,6 @@ import org.linphone.mediastream.Version;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration.AndroidCamera;
 import org.linphone.mediastream.video.capture.hwconf.Hacks;
-import org.linphone.tools.H264Helper;
 import org.linphone.tools.OpenH264DownloadHelper;
 
 import java.io.File;
@@ -209,7 +208,6 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 		mLPConfigXsd = basePath + "/lpconfig.xsd";
 		mLinphoneFactoryConfigFile = basePath + "/linphonerc";
 		mLinphoneConfigFile = basePath + "/.linphonerc";
-		mLinphoneRootCaFile = basePath + "/rootca.pem";
 		mDynamicConfigFile = basePath + "/assistant_create.rc";
 		mRingSoundFile = basePath + "/ringtone.mkv";
 		mRingbackSoundFile = basePath + "/ringback.wav";
@@ -236,7 +234,6 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 	/** Called when the activity is first created. */
 	private final String mLPConfigXsd;
 	private final String mLinphoneFactoryConfigFile;
-	private final String mLinphoneRootCaFile;
 	private final String mDynamicConfigFile;
 	public final String mLinphoneConfigFile;
 	private final String mRingSoundFile;
@@ -357,9 +354,6 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 		instance = new LinphoneManager(c);
 		instance.startLibLinphone(c);
 		instance.initOpenH264DownloadHelper();
-
-		// H264 codec Management - set to auto mode -> MediaCodec >= android 5.0 >= OpenH264
-		H264Helper.setH264Mode(H264Helper.MODE_AUTO, getLc());
 
 
 		return instance;
@@ -801,7 +795,6 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 		}
 
 		mLc.setRingback(mRingbackSoundFile);
-		mLc.setRootCA(mLinphoneRootCaFile);
 		mLc.setPlayFile(mPauseSoundFile);
 		mLc.setChatDatabasePath(mChatDatabaseFile);
 		mLc.setCallLogsDatabasePath(mCallLogDatabaseFile);
@@ -899,7 +892,7 @@ public class LinphoneManager implements LinphoneCoreListener, LinphoneChatMessag
 		copyIfNotExist(R.raw.linphonerc_default, mLinphoneConfigFile);
 		copyFromPackage(R.raw.linphonerc_factory, new File(mLinphoneFactoryConfigFile).getName());
 		copyIfNotExist(R.raw.lpconfig, mLPConfigXsd);
-		copyFromPackage(R.raw.rootca, new File(mLinphoneRootCaFile).getName());
+		//copyFromPackage(R.raw.rootca, new File(mLinphoneRootCaFile).getName());
 		copyFromPackage(R.raw.assistant_create, new File(mDynamicConfigFile).getName());
 	}
 
