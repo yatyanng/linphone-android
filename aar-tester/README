@@ -1,2 +1,0 @@
-To test an AAR, simply copy it from bin/outputs/aar/liblinphone-sdk.aar to app/libs/
-Then build and run the app.
