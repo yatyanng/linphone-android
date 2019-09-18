@@ -99,12 +99,31 @@ android {
     }
 }
 
+static def isLocalDebugAarAvailable() {
+    File debugAar = new File('linphone-sdk-android/linphone-sdk-android-debug.aar')
+    return debugAar.exists()
+}
+
+static def isLocalReleaseAarAvailable() {
+    File releaseAar = new File('linphone-sdk-android/linphone-sdk-android-release.aar')
+    return releaseAar.exists()
+}
+
+static def isLocalAarAvailable() {
+    return isLocalDebugAarAvailable() || isLocalReleaseAarAvailable()
+}
+
 dependencies {
     implementation 'org.apache.commons:commons-compress:1.16.1'
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.android.support:support-v4:27.0.1'
-    releaseImplementation project(path: ":linphone-sdk-android", configuration: 'release')
-    debugImplementation project(path: ":linphone-sdk-android", configuration: 'debug')
+    implementation 'com.android.support:support-v4:27.0.1'
+    if (isLocalAarAvailable()) {
+        releaseImplementation project(path: ":linphone-sdk-android", configuration: 'release')
+        debugImplementation project(path: ":linphone-sdk-android", configuration: 'debug')
+    } else {
+        implementation "org.linphone.legacy:linphone-sdk-android:4.2+"
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
