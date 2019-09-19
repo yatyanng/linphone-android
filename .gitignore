@@ -7,6 +7,7 @@
 adb.pid
 bc-android.keystore
 bin
+bin-sdk
 build
 certdata.txt
 check_tools.mk

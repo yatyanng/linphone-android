@@ -31,7 +31,6 @@ apply plugin: 'com.android.application'
 
 def excludeFiles = []
 // Remove or comment if you want to use those
-excludeFiles.add('src/android/org/linphone/tutorials/*.java')
 excludeFiles.add('**/gcm*')
 
 def excludePackage = []
@@ -118,12 +117,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.android.support:support-v4:27.0.1'
     implementation 'com.android.support:support-v4:27.0.1'
-    if (isLocalAarAvailable()) {
+    /*if (isLocalAarAvailable()) {
         releaseImplementation project(path: ":linphone-sdk-android", configuration: 'release')
         debugImplementation project(path: ":linphone-sdk-android", configuration: 'debug')
-    } else {
+    } else {*/
         implementation "org.linphone.legacy:linphone-sdk-android:4.2+"
-    }
+    //}
 }
 
 apply plugin: 'com.google.gms.google-services'
