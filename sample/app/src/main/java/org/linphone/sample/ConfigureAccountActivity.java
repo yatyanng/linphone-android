@@ -31,7 +31,7 @@ public class ConfigureAccountActivity extends Activity {
 
         setContentView(R.layout.configure_account);
 
-        // Account creator can help you create/config accounts, even not sip.linphone.org ones
+        // Account creator can help you create/config accounts, even not sip.saleschat.tech ones
         // As we only want to configure an existing account, no need for server URL to make requests
         // to know whether or not account exists, etc...
         mAccountCreator = LinphoneService.getCore().createAccountCreator(null);

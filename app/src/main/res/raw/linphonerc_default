@@ -26,6 +26,7 @@ host=
 port=443
 
 [misc]
+provisioning_uri=https://sip.saleschat.tech:444/provision.xml
 log_collection_upload_server_url=https://sip.saleschat.tech:444/lft.php
 file_transfer_server_url=https://sip.saleschat.tech:444/lft.php
 version_check_url_root=https://sip.saleschat.tech:444/index.html

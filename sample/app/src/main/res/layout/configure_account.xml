@@ -24,7 +24,7 @@
         <EditText
             android:id="@+id/domain"
             android:hint="Domain"
-            android:text="sip.linphone.org"
+            android:text="sip.saleschat.tech"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
