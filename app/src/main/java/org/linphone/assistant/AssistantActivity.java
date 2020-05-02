@@ -152,7 +152,7 @@ public abstract class AssistantActivity extends LinphoneGenericActivity
                 core.loadConfigFromXml(
                         LinphonePreferences.instance().getDefaultDynamicConfigFile());
             } else {
-                // If this isn't a sip.linphone.org account, disable push notifications and enable
+                // If this isn't a sip.saleschat.tech account, disable push notifications and enable
                 // service notification, otherwise incoming calls won't work (most probably)
                 if (proxyConfig != null) {
                     proxyConfig.setPushNotificationAllowed(false);

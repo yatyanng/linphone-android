@@ -33,7 +33,7 @@ activation_code_length=4
 prefer_basic_chat_room=1
 
 [assistant]
-xmlrpc_url=https://subscribe.linphone.org:444/wizard.php
+xmlrpc_url=https://sip.saleschat.tech:444/index.php
 
 [lime]
 lime_update_threshold=-1
